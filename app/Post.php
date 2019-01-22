@@ -2,8 +2,10 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+
 
 /**
  * Class Post
@@ -22,17 +24,33 @@ use Carbon\Carbon;
  */
 class Post extends Model
 {
+    public function author()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function getImageUrlAttribute()
     {
         $imageUrl = "";
 
-        if (! is_null($this->image)) {
+        if (!is_null($this->image)) {
             $imagePath = public_path() . "/img/" . $this->image;
-             if (file_exists($imagePath)) {
-                 $imageUrl = asset('img/' . $this->image);
-             }
+            if (file_exists($imagePath)) {
+                $imageUrl = asset('img/' . $this->image);
+            }
         }
 
         return $imageUrl;
+    }
+
+    public function getDateAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
+
+    public function scopeLatestFirst(Builder $query)
+    {
+//        return $query->orderBy('created_at', 'desc');
+        return $query->latest();
     }
 }
