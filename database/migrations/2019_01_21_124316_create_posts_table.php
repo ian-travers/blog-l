@@ -26,6 +26,9 @@ class CreatePostsTable extends Migration
 
     public function down()
     {
+//        Schema::table('posts', function (Blueprint $table) {
+//            $table->dropForeign(['author_id']);
+//        });
         Schema::dropIfExists('posts');
     }
 }
