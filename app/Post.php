@@ -19,11 +19,14 @@ use Carbon\Carbon;
  * @property integer $author_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property Carbon $published_at
  *
  * @property User $author
  */
 class Post extends Model
 {
+    protected $dates = ['published_at'];
+
     public function author()
     {
         return $this->belongsTo(User::class);
@@ -45,7 +48,12 @@ class Post extends Model
 
     public function getDateAttribute()
     {
-        return $this->created_at->diffForHumans();
+        return is_null($this->created_at) ? '' : $this->created_at->diffForHumans();
+    }
+
+    public function getPublishedDateAttribute()
+    {
+        return is_null($this->published_at) ? '' : $this->published_at->diffForHumans();
     }
 
     public function scopeLatestFirst(Builder $query)
@@ -53,4 +61,11 @@ class Post extends Model
 //        return $query->orderBy('created_at', 'desc');
         return $query->latest();
     }
+
+    public function scopePublished(Builder $query)
+    {
+        return $query->where('published_at', '<=', Carbon::now());
+    }
 }
+
+

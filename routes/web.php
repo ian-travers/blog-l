@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'BlogController@index');
+Route::get('/', 'BlogController@index')->name('blog.index');
 
 Route::get('/blog/show', function () {
     return view('blog.show');

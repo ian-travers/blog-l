@@ -6,11 +6,14 @@ use App\Post;
 
 class BlogController extends Controller
 {
-    protected $postsPerPage = 4;
+    protected $postsPerPage = 3;
 
     public function index()
     {
-        $posts = Post::with('author')->latestFirst()->paginate($this->postsPerPage);
+        $posts = Post::with('author')
+            ->latestFirst()
+            ->published()
+            ->paginate($this->postsPerPage);
 
         return view('blog.index', compact('posts'));
     }

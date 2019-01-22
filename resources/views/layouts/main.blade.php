@@ -22,8 +22,8 @@
 
             <div id="navbarNavDropdown" class="navbar-collapse collapse">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Blog <span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('blog.index') }}">Blog <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
