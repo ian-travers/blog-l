@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,6 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $name
  * @property string $slug
  * @property string $email
+ * @property string $bio
  * @property null|Carbon $email_verified_at
  * @property string $password
  * @property null|string $remember_token
@@ -52,5 +54,18 @@ class User extends Authenticatable
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function getBioHtmlAttribute()
+    {
+        return $this->bio ? Markdown::convertToHTML(e($this->bio)) : null;
+    }
+
+    public function gravatar()
+    {
+        $email = $this->email;
+        $size = 100;
+
+        return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=" . $size;
     }
 }
