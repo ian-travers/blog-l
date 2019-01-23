@@ -11,16 +11,12 @@ class BlogController extends Controller
 
     public function index()
     {
-        $categories = Category::with(['posts' => function ($query) {
-            $query->published();
-        }])->orderBy('title')->get();
-
         $posts = Post::with('author')
             ->latestFirst()
             ->published()
             ->paginate($this->postsPerPage);
 
-        return view('blog.index', compact('posts', 'categories'));
+        return view('blog.index', compact('posts'));
     }
 
     public function show(Post $post)
@@ -30,16 +26,14 @@ class BlogController extends Controller
 
     public function category(Category $category)
     {
-        $categories = Category::with(['posts' => function ($query) {
-            $query->published();
-        }])->orderBy('title')->get();
+        $categoryName = $category->title;
 
-        $posts = Post::with('author')
+        $posts = $category->posts()
+            ->with('author')
             ->latestFirst()
             ->published()
-            ->where('category_id', $category->id)
             ->paginate($this->postsPerPage);
 
-        return view('blog.index', compact('posts', 'categories'));
+        return view('blog.index', compact('posts', 'categoryName'));
     }
 }
