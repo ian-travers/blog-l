@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *
  * @property integer $id
  * @property string $name
+ * @property string $slug
  * @property string $email
  * @property null|Carbon $email_verified_at
  * @property string $password
@@ -45,6 +46,11 @@ class User extends Authenticatable
 
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class, 'author_id');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

@@ -16,6 +16,12 @@
                         </div>
                     @endif
 
+                    @if(isset($authorName))
+                        <div class="alert alert-info">
+                            Author: <strong>{{ $authorName }}</strong>
+                        </div>
+                    @endif
+
                     @foreach($posts as $post)
                         @php /* @var App\Post $post */ @endphp
 
@@ -41,10 +47,14 @@
                                 <div class="post-meta padding-10 clearfix">
                                     <div class="pull-left">
                                         <ul class="post-meta-group">
-                                            <li><i class="fa fa-user"></i><a href="#">{{ $post->author->name }}</a></li>
+                                            <li><i class="fa fa-user"></i><a
+                                                        href="{{ route('author', $post->author->slug) }}">{{ $post->author->name }}</a>
+                                            </li>
                                             <li><i class="fa fa-clock-o"></i>Created {{ $post->date }}</li>
                                             <li><i class="fa fa-clock-o"></i>Published {{ $post->published_date }}</li>
-                                            <li><i class="fa fa-folder"></i><a href="{{ route('category', $post->category->slug) }}"> {{ $post->category->title }}</a></li>
+                                            <li><i class="fa fa-folder"></i><a
+                                                        href="{{ route('category', $post->category->slug) }}"> {{ $post->category->title }}</a>
+                                            </li>
                                             <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
                                         </ul>
                                     </div>
@@ -57,7 +67,6 @@
 
                     @endforeach
                 @endif
-
 
 
                 <nav>

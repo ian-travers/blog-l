@@ -23,7 +23,7 @@
 
                         <div class="post-meta no-border">
                             <ul class="post-meta-group">
-                                <li><i class="fa fa-user"></i><a href="#"> {{ $post->author->name }}</a></li>
+                                <li><i class="fa fa-user"></i><a href="{{ route('author', $post->author->slug) }}">{{ $post->author->name }}</a></li>
                                 <li><i class="fa fa-clock-o"></i>
                                     <time> {{ $post->date }}</time>
                                 </li>
@@ -39,16 +39,16 @@
             <article class="post-author padding-10">
                 <div class="media">
                     <div class="media-left">
-                        <a href="#">
+                        <a href="{{ route('author', $post->author->slug) }}">
                             <img alt="Author 1" src="/img/author.jpg" class="media-object">
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading"><a href="#">{{ $post->author->name }}</a></h4>
+                        <h4 class="media-heading"><a href="{{ route('author', $post->author->slug) }}">{{ $post->author->name }}</a></h4>
                         <div class="post-author-count">
-                            <a href="#">
+                            <a href="{{ route('author', $post->author->slug) }}">
                                 <i class="fa fa-clone"></i>
-                                90 posts
+                                {{ $postAuthorPostsCount }} {{ str_plural('post', $postAuthorPostsCount) }}
                             </a>
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad aut sunt cum, mollitia
