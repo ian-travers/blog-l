@@ -2,7 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
+
 
 class PostsTableSeeder extends Seeder
 {
@@ -27,8 +27,8 @@ class PostsTableSeeder extends Seeder
                 'author_id' => rand(1, 3),
                 'title' => $title,
                 'excerpt' => $faker->text(rand(250, 350)),
-                'body' => $faker->paragraph(rand(10, 12), true),
-                'slug' => Str::slug(
+                'body' => $faker->paragraphs(rand(8, 12), true),
+                'slug' => str_slug(
                     mb_substr($title, 0, 50)
                     . '-'
                     . Carbon::now()->format('dmyHi')

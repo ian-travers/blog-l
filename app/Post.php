@@ -2,6 +2,7 @@
 
 namespace App;
 
+use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
@@ -54,6 +55,16 @@ class Post extends Model
     public function getPublishedDateAttribute()
     {
         return is_null($this->published_at) ? '' : $this->published_at->diffForHumans();
+    }
+
+    public function getBodyHtmlAttribute()
+    {
+        return $this->body ? Markdown::convertToHTML(e($this->body)) : null;
+    }
+
+    public function getExcerptHtmlAttribute()
+    {
+        return $this->excerpt ? Markdown::convertToHTML(e($this->excerpt)) : null;
     }
 
     public function scopeLatestFirst(Builder $query)
