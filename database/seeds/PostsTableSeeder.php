@@ -34,6 +34,7 @@ class PostsTableSeeder extends Seeder
                     . Carbon::now()->format('dmyHi')
                 ),
                 'image' => rand(0, 1) ? $image : null,
+                'category_id' => 0,
                 'created_at' => $createdDate,
                 'updated_at' => $createdDate,
                 'published_at' => $i > 4 && rand(0, 1) == 0 ? null : $publishedDate->addDay($i + rand(3, 5)),
