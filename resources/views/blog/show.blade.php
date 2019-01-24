@@ -52,7 +52,7 @@
                                 {{ $postAuthorPostsCount }} {{ str_plural('post', $postAuthorPostsCount) }}
                             </a>
                         </div>
-                        {!! $post->author->bio_html !!}
+                        {!! $author->bio_html !!}
                     </div>
                 </div>
             </article>
