@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 <head>
     <meta charset="UTF-8">
     <title>MyBlog | My Awesome Blog</title>
@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="/css/custom.css">
 </head>
-<body>
+<body class="d-flex flex-column h-100">
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -56,9 +56,11 @@
     </nav>
 </header>
 
-@yield('content')
+<main>
+    @yield('content')
+</main>
 
-<footer>
+<footer class="footer mt-auto py-3">
     <div class="container">
         <div class="row">
             <div class="col-md-8">
