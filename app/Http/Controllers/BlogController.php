@@ -22,6 +22,15 @@ class BlogController extends Controller
 
     public function show(Post $post)
     {
+//         #1
+//         update posts SET views_count (needs $fillable for model class)
+//        $viewsCount = $post->views_count + 1;
+//        $post->update(['views_count' => $viewsCount]);
+
+//        #2
+        $post->increment('views_count');
+
+
         $postAuthorPostsCount = $post->author->posts()
             ->published()
             ->count();
