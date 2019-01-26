@@ -24,8 +24,11 @@
                         @php /* @var App\Category $category */ @endphp
 
                         <li>
-                            <a href="{{ route('category', $category->slug) }}"><i class="fa fa-angle-right"></i> {{ $category->title }}</a>
-                            <span class="badge badge-secondary pull-right">{{ $category->posts->count() }}</span>
+                            <div>
+                                <a href="{{ route('category', $category->slug) }}"><i class="fas fa-angle-right"></i> {{ $category->title }}</a>
+                                <span class="badge badge-secondary float-right">{{ $category->posts->count() }}</span>
+                            </div>
+
                         </li>
 
                     @endforeach

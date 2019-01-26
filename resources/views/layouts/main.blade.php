@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <title>MyBlog | My Awesome Blog</title>
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+
+    <!-- Scripts -->
+    <script src="{{ mix('js/app.js', 'build') }}" defer></script>
+
+    <!-- Styles -->
+    <link href="{{ mix('css/app.css', 'build') }}" rel="stylesheet">
     <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body class="d-flex flex-column h-100">
@@ -56,7 +64,7 @@
     </nav>
 </header>
 
-<main>
+<main id="app">
     @yield('content')
 </main>
 
@@ -80,8 +88,6 @@
     </div>
 </footer>
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
 

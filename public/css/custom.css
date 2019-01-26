@@ -211,7 +211,7 @@ li.comment-item:first-child {
 
 ul.categories, ul.popular-posts, ul.tags {
     list-style: none;
-    padding: 20px;
+    padding: 20px 20px 0;
     margin-bottom: 0;
 }
 
