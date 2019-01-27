@@ -34,7 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'slug', 'email', 'password',
     ];
 
     /**
@@ -67,5 +67,10 @@ class User extends Authenticatable
         $size = 100;
 
         return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=" . $size;
+    }
+
+    public function getRegisteredAttribute()
+    {
+        return is_null($this->created_at) ? '' : $this->created_at;
     }
 }
