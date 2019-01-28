@@ -77,10 +77,10 @@
             <div class="col-md-4">
                 <nav>
                     <ul class="social-icons">
-                        <li><a href="#" class="i fa fa-facebook"></a></li>
-                        <li><a href="#" class="i fa fa-twitter"></a></li>
-                        <li><a href="#" class="i fa fa-google-plus"></a></li>
-                        <li><a href="#" class="i fa fa-github"></a></li>
+                        <li><a href="#" class="i fab fa-facebook"></a></li>
+                        <li><a href="#" class="i fab fa-twitter"></a></li>
+                        <li><a href="#" class="i fab fa-google-plus"></a></li>
+                        <li><a href="#" class="i fab fa-github"></a></li>
                     </ul>
                 </nav>
             </div>
