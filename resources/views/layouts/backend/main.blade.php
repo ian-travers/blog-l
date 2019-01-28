@@ -14,7 +14,7 @@
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
 
     <!-- Scripts -->
-    <script src="{{ mix('js/app.js', 'build') }}" defer></script>
+    {{--<script src="{{ mix('js/app.js', 'build') }}" defer></script>--}}
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css', 'build') }}" rel="stylesheet">
@@ -55,7 +55,11 @@
 
 
 </div>
-<!-- ./wrapper -->
+
+<!-- Scripts -->
+<script src="{{ mix('js/app.js', 'build') }}"></script>
+
+@yield('script')
 
 </body>
 </html>

@@ -11,11 +11,12 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h2 class="m-0 text-dark">{{ Auth::user()->name }}</h2>
+                        <h4>{{ $activeMenuItem }}</h4>
+                        <h5>{{ $activeMenuSubItem == '' ? 'empty' : $activeMenuSubItem }}</h5>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Starter Page</li>
+                            <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
