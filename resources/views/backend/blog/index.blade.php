@@ -32,6 +32,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
+
+                        @include('layouts.backend._messages')
+
                         <div class="card">
                             <div class="card-header">
                                 <a href="{{ route('backend.blog.create') }}" class="btn btn-outline-success">Create Post ...</a>

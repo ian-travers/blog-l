@@ -27,6 +27,10 @@ use Carbon\Carbon;
  */
 class Post extends Model
 {
+    protected $fillable = [
+        'title', 'slug', 'excerpt', 'body', 'category_id', 'published_at',
+    ];
+
     protected $dates = ['published_at'];
 
     public function author()
@@ -124,6 +128,16 @@ class Post extends Model
         }
 
         return '<span class="badge badge-success badge-pill">Published</span>';
+    }
+
+    public function setSlugAttribute($value) {
+
+        $this->attributes['slug'] = str_slug($this->title);
+    }
+
+    public function setPublishedAtAttribute($value)
+    {
+        $this->attributes['published_at'] = $value ? Carbon::createFromFormat('Y-m-d\TH:i', $value) : null;
     }
 
 }

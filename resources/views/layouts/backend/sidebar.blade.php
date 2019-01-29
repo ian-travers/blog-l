@@ -46,7 +46,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('backend.blog.create') }}" class="nav-link">
+                            <a href="{{ route('backend.blog.create') }}"
+                               class="nav-link {{ $activeMenuSubItem == 'Add Post' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i><p>Add post</p>
                             </a>
                         </li>

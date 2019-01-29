@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Requests\PostRequest;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -27,14 +28,25 @@ class BlogController extends CoreController
         ]);
     }
 
-    public function create()
+    public function create(Post $post)
     {
-        dd('Create post');
+        $this->activeMenuSubItem = 'Add Post';
+
+        return view('backend.blog.create', [
+            'post' => $post,
+            'activeMenuItem' => $this->activeMenuItem,
+            'activeMenuSubItem' => $this->activeMenuSubItem,
+        ]);
     }
 
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        $request->user()->posts()->create($request->all());
+
+        return redirect()->route('backend.blog.index')->with([
+            'type' => 'success',
+            'message' => 'Your post has been created.',
+        ]);
     }
 
     public function show($id)
