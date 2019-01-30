@@ -37,6 +37,7 @@
                                 {!! Form::model($post, [
                                     'method' => 'post',
                                     'route' => 'backend.blog.store',
+                                    'files' => true,
                                 ]) !!}
 
                                 <div class="form-group">
@@ -92,6 +93,17 @@
                                     @if($errors->has('body'))
                                         <div class="invalid-feedback">
                                             <strong>{{ $errors->first('body') }}</strong>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    {!! Form::label('image', 'Feature Image') !!}
+{{--                                    {!! Form::file('image') !!}--}}
+                                    {!! Form::file('image', ['class' => ['form-control-file', $errors->has('image') ? 'is-invalid' : '']]) !!}
+                                    @if($errors->has('image'))
+                                        <div class="invalid-feedback">
+                                            <strong>{{ $errors->first('image') }}</strong>
                                         </div>
                                     @endif
                                 </div>

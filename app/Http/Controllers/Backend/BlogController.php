@@ -9,9 +9,16 @@ use Illuminate\Support\Collection;
 
 class BlogController extends CoreController
 {
-    protected $activeMenuItem = 'Blog';
+    protected $uploadPath;
+    protected $perPage;
 
-    protected $perPage = 5;
+    public function __construct()
+    {
+        parent::__construct();
+        $this->activeMenuItem = 'Blog';
+        $this->perPage = 5;
+        $this->uploadPath = public_path('img');
+    }
 
 
     public function index()
@@ -41,7 +48,9 @@ class BlogController extends CoreController
 
     public function store(PostRequest $request)
     {
-        $request->user()->posts()->create($request->all());
+        $data = $this->handleRequest($request);
+
+        $request->user()->posts()->create($data);
 
         return redirect()->route('backend.blog.index')->with([
             'type' => 'success',
@@ -67,5 +76,21 @@ class BlogController extends CoreController
     public function destroy($id)
     {
         //
+    }
+
+    private function handleRequest(PostRequest $request)
+    {
+        $data = $request->all();
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $fileName = $image->getClientOriginalName();
+            $destination = $this->uploadPath;
+            $image->move($destination, $fileName);
+
+            $data['image'] = $fileName;
+        }
+
+        return $data;
     }
 }
