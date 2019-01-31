@@ -64,9 +64,15 @@ class BlogController extends CoreController
         //
     }
 
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        $this->activeMenuSubItem = 'Edit Post';
+
+        return view('backend.blog.create', [
+            'post' => $post,
+            'activeMenuItem' => $this->activeMenuItem,
+            'activeMenuSubItem' => $this->activeMenuSubItem,
+        ]);
     }
 
     public function update(Request $request, $id)
