@@ -66,7 +66,7 @@
 
                                         <tr>
                                             <td class="text-center">
-                                                <a href="{{ route('backend.blog.edit', $post->id) }}" class="btn btn-outline-secondary btn-sm" title="Edit">
+                                                <a href="{{ route('backend.blog.edit', $post) }}" class="btn btn-outline-secondary btn-sm" title="Edit">
                                                     <i class="far fa-edit"></i>
                                                 </a>
                                                 <a href="{{ route('backend.blog.destroy', $post->id) }}" class="btn btn-outline-danger btn-sm" title="Delete">

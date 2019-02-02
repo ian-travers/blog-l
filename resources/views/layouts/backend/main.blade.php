@@ -11,7 +11,7 @@
     <title>@yield('title', 'MY BLOG')</title>
 
     <!-- Fonts -->
-    {{--<link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>--}}
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
 
     <!-- Scripts -->
     {{--<script src="{{ mix('js/app.js', 'build') }}" defer></script>--}}
