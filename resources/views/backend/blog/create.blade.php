@@ -50,10 +50,10 @@
 @endsection
 
 @section('script')
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
-        $("ul.pagination").addClass("pagination-sm");
-
-        var simplemde1 = new SimpleMDE({ element: $('#excerpt')[0] });
+        CKEDITOR.replace( 'excerpt' );
+        CKEDITOR.replace( 'body' );
     </script>
 @endsection
 

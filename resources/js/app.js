@@ -7,6 +7,13 @@
 
 require('./bootstrap');
 
+// Use CKEditor
+// $(document).ready(function () {
+//     CKEDITOR.replace('excerpt');
+//     CKEDITOR.replace('body');
+// });
+
+
 window.Vue = require('vue');
 
 /**
