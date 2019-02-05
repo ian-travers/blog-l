@@ -17,20 +17,30 @@ class BlogController extends CoreController
     {
         parent::__construct();
         $this->activeMenuItem = 'Blog';
-        $this->perPage = 5;
+        $this->perPage = 8;
         $this->uploadPath = public_path(config('cms.image.directory'));
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
+        if (($status = $request->get('status')) && $status == 'trash') {
+            $posts = Post::onlyTrashed()->with('category', 'author')->latest()->paginate($this->perPage);
+            $postsCount = Post::onlyTrashed()->count();
+            $onlyTrashed = true;
+        } else {
+            $posts = Post::with('category', 'author')->latest()->paginate($this->perPage);
+            $postsCount = Post::count();
+            $onlyTrashed = false;
+        }
+
         $this->activeMenuSubItem = 'All Posts';
-        $posts = Post::with('category', 'author')->latest()->paginate($this->perPage);
-        $postsCount = Post::count();
+
 
         return view('backend.blog.index', [
             'posts' => $posts,
             'postsCount' => $postsCount,
+            'onlyTrashed' => $onlyTrashed,
             'activeMenuItem' => $this->activeMenuItem,
             'activeMenuSubItem' => $this->activeMenuSubItem,
         ]);
@@ -95,9 +105,31 @@ class BlogController extends CoreController
     {
         Post::findOrFail($id)->delete();
 
-        return redirect()->route('backend.blog.index')->with([
+        return redirect()->route('backend.blog.index')->with('trash-message', [
+            'The post has been moved to Trash.',
+            $id,
+        ]);
+    }
+
+    public function forceDestroy($id)
+    {
+        Post::withTrashed()->findOrFail($id)->forceDelete();
+
+        return redirect()->route('backend.blog.index', ['status' => 'trash'])->with([
             'type' => 'success',
             'message' => 'The post has been deleted.',
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $post = Post::withTrashed()->findOrFail($id);
+
+        $post->restore();
+
+        return redirect()->route('backend.blog.index')->with([
+            'type' => 'success',
+            'message' => 'The post has been restored from the Trash.',
         ]);
     }
 

@@ -6,6 +6,7 @@ use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 /**
@@ -27,6 +28,8 @@ use Carbon\Carbon;
  */
 class Post extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'title', 'slug', 'excerpt', 'body', 'category_id', 'published_at', 'image'
     ];

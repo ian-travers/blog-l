@@ -37,8 +37,15 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{ route('backend.blog.create') }}" class="btn btn-outline-success"><i class="fas fa-plus"></i> Add Post</a>
+                                <div class="float-left">
+                                    <a href="{{ route('backend.blog.create') }}" class="btn btn-outline-success"><i class="fas fa-plus"></i> Add Post</a>
+                                </div>
+                                <div class="float-right py-2">
+                                    <a href="?status=all">All</a> |
+                                    <a href="?status=trash">Trash</a>
+                                </div>
                             </div>
+
                             <div class="card-body">
 
                                 @if(!$posts->count())
@@ -49,49 +56,11 @@
 
                                 @else
 
-                                    <table class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <td width="91">Action</td>
-                                        <td>Title</td>
-                                        <td width="120">Author</td>
-                                        <td width="150">Category</td>
-                                        <td width="171">Date</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    @php /* @var App\Post $post */ @endphp
-                                    @foreach($posts as $post)
-
-                                        <tr>
-                                            <td class="text-center">
-                                                {!! Form::open([
-                                                    'method' => 'delete',
-                                                    'route' => ['backend.blog.destroy', $post->id],
-                                                ]) !!}
-                                                <a href="{{ route('backend.blog.edit', $post) }}" class="btn btn-outline-secondary btn-sm" title="Edit">
-                                                    <i class="far fa-edit"></i>
-                                                </a>
-                                                <button type="submit" class="btn btn-outline-danger btn-sm" title="Delete">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </button>
-                                                {!! Form::close() !!}
-                                            </td>
-                                            <td>{{ $post->title }}</td>
-                                            <td>{{ $post->author->name }}</td>
-                                            <td>{{ $post->category->title }}</td>
-                                            <td>
-                                                <abbr title="{{ $post->dateFormatted(true) }}">{{ $post->dateFormatted() }}</abbr>
-                                                {!! $post->publicationLabel() !!}
-                                            </td>
-                                        </tr>
-
-                                    @endforeach
-
-                                    </tbody>
-                                </table>
-
+                                    @if($onlyTrashed)
+                                        @include('backend.blog.table-trash')
+                                    @else
+                                        @include('backend.blog.table')
+                                    @endif
 
                                     <div class="d-flex justify-content-between">
                                         <div class="mt-3">
