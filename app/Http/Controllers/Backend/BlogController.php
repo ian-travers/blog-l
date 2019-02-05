@@ -55,7 +55,7 @@ class BlogController extends CoreController
 
         return redirect()->route('backend.blog.index')->with([
             'type' => 'success',
-            'message' => 'Your post has been created.',
+            'message' => 'The post has been created.',
         ]);
     }
 
@@ -87,13 +87,18 @@ class BlogController extends CoreController
 
         return redirect()->route('backend.blog.index')->with([
             'type' => 'success',
-            'message' => 'Your post has been updated.',
+            'message' => 'The post has been updated.',
         ]);
     }
 
     public function destroy($id)
     {
-        //
+        Post::findOrFail($id)->delete();
+
+        return redirect()->route('backend.blog.index')->with([
+            'type' => 'success',
+            'message' => 'The post has been deleted.',
+        ]);
     }
 
     private function handleRequest(PostRequest $request)

@@ -66,12 +66,17 @@
 
                                         <tr>
                                             <td class="text-center">
+                                                {!! Form::open([
+                                                    'method' => 'delete',
+                                                    'route' => ['backend.blog.destroy', $post->id],
+                                                ]) !!}
                                                 <a href="{{ route('backend.blog.edit', $post) }}" class="btn btn-outline-secondary btn-sm" title="Edit">
                                                     <i class="far fa-edit"></i>
                                                 </a>
-                                                <a href="{{ route('backend.blog.destroy', $post->id) }}" class="btn btn-outline-danger btn-sm" title="Delete">
+                                                <button type="submit" class="btn btn-outline-danger btn-sm" title="Delete">
                                                     <i class="far fa-trash-alt"></i>
-                                                </a>
+                                                </button>
+                                                {!! Form::close() !!}
                                             </td>
                                             <td>{{ $post->title }}</td>
                                             <td>{{ $post->author->name }}</td>
