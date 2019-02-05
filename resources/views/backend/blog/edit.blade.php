@@ -35,7 +35,7 @@
                     'method' => 'put',
                     'route' => ['backend.blog.update', $post->id],
                     'files' => true,
-                    'if' => 'post-form',
+                    'id' => 'post-form',
                 ]) !!}
 
                 @include('backend.blog._form')
@@ -50,12 +50,6 @@
     <!-- /.content-wrapper -->
 @endsection
 
-@section('script')
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace( 'excerpt' );
-        CKEDITOR.replace( 'body' );
-    </script>
-@endsection
+@include('backend.blog.script')
 
 

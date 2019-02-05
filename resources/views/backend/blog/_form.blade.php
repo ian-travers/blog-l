@@ -16,7 +16,6 @@
                 </div>
 
                 <div class="form-group d-none">
-                    {!! Form::label('slug') !!}
                     {!! Form::text('slug') !!}
                 </div>
 
@@ -63,9 +62,27 @@
             <div class="card-header">
                 <h5 class="m-0">{!! Form::label('image', 'Feature Image') !!}</h5>
             </div>
+
+            @php $imgUrl = $post->image_thumb_url ?: null @endphp
+
             <div class="card-body">
+
+                @if($imgUrl)
+
+                    <div class="text-center">
+                        {!! Form::image($imgUrl) !!}
+                    </div>
+                @else
+                    <h6 class="text-info text-center">The post has no feature image</h6>
+                @endif
                 <div class="form-group">
-                    {!! Form::file('image', ['class' => ['form-control-file', $errors->has('image') ? 'is-invalid' : '']]) !!}
+                    {!! Form::file('image', [
+                        'id' => 'input-image',
+                        'class' => [
+                            'form-control-file',
+                            $errors->has('image') ? 'is-invalid' : ''
+                        ]
+                    ]) !!}
                     @if($errors->has('image'))
                         <div class="invalid-feedback">
                             <strong>{{ $errors->first('image') }}</strong>

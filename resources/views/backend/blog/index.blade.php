@@ -37,7 +37,7 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{ route('backend.blog.create') }}" class="btn btn-outline-success">Create Post ...</a>
+                                <a href="{{ route('backend.blog.create') }}" class="btn btn-outline-success"><i class="fas fa-plus"></i> Add Post</a>
                             </div>
                             <div class="card-body">
 

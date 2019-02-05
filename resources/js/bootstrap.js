@@ -13,6 +13,8 @@ try {
 
     require('bootstrap');
     require('admin-lte');
+    require('bootstrap-fileinput/js/fileinput.min');
+    require('bootstrap-fileinput/themes/fas/theme.min');
 } catch (e) {}
 
 /**
