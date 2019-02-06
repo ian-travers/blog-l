@@ -41,8 +41,20 @@
                                     <a href="{{ route('backend.blog.create') }}" class="btn btn-outline-success"><i class="fas fa-plus"></i> Add Post</a>
                                 </div>
                                 <div class="float-right py-2">
-                                    <a href="?status=all">All</a> |
-                                    <a href="?status=trash">Trash</a>
+
+                                    @php $links = [] @endphp
+
+                                    @foreach($statusList as $key => $value)
+                                        @if($value)
+                                            @php
+                                                $selected = Request::get('status') == $key ? 'selected-status' : '';
+                                                $links[] = "<a class=\"{$selected}\" href=\"?status={$key}\">" . ucwords($key) . " ({$value})</a>"
+                                            @endphp
+                                        @endif
+                                    @endforeach
+
+                                    {!! implode(' | ', $links) !!}
+
                                 </div>
                             </div>
 
@@ -64,7 +76,7 @@
 
                                     <div class="d-flex justify-content-between">
                                         <div class="mt-3">
-                                            {{ $posts->links() }}
+                                            {{ $posts->appends(Request::query())->links() }}
                                         </div>
                                         <div class="mt-3">
                                             Total: {{ $postsCount }} {{ str_plural('item', $postsCount) }}

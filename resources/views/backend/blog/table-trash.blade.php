@@ -30,7 +30,7 @@
                     'method' => 'delete',
                     'route' => ['backend.blog.force-destroy', $post->id],
                 ]) !!}
-                <button type="submit" class="btn btn-outline-danger btn-sm" title="Delete permanent" onclick="return confirm('You are aboiy to delete a post permanently. Are you sure?')">
+                <button type="submit" class="btn btn-outline-danger btn-sm" title="Delete permanent" onclick="return confirm('You are about to delete a post permanently. Are you sure?')">
                     <i class="fas fa-times"></i>
                 </button>
                 {!! Form::close() !!}

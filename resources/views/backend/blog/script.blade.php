@@ -10,6 +10,7 @@
             showCaption: false,
             showRemove: false,
             showCancel: false,
+            maxFileSize: 2000,
         });
     </script>
 @endsection

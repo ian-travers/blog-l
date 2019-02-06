@@ -80,7 +80,7 @@
                         'id' => 'input-image',
                         'class' => [
                             'form-control-file',
-                            $errors->has('image') ? 'is-invalid' : ''
+                            $errors->has('image') ? ' is-invalid' : ''
                         ]
                     ]) !!}
                     @if($errors->has('image'))

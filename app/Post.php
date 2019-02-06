@@ -114,6 +114,16 @@ class Post extends Model
         return $query->where('published_at', '<=', Carbon::now());
     }
 
+    public function scopeScheduled(Builder $query)
+    {
+        return $query->where('published_at', '>', Carbon::now());
+    }
+
+    public function scopeDraft(Builder $query)
+    {
+        return $query->whereNull('published_at');
+    }
+
     public function dateFormatted($showTimes = false)
     {
         $format = "d-m-Y";

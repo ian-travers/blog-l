@@ -17,25 +17,34 @@ class BlogController extends CoreController
     {
         parent::__construct();
         $this->activeMenuItem = 'Blog';
-        $this->perPage = 8;
+        $this->perPage = 6;
         $this->uploadPath = public_path(config('cms.image.directory'));
     }
 
 
     public function index(Request $request)
     {
+        $onlyTrashed = false;
+
         if (($status = $request->get('status')) && $status == 'trash') {
             $posts = Post::onlyTrashed()->with('category', 'author')->latest()->paginate($this->perPage);
             $postsCount = Post::onlyTrashed()->count();
             $onlyTrashed = true;
+        } elseif ($status == 'published') {
+            $posts = Post::published()->with('category', 'author')->latest()->paginate($this->perPage);
+            $postsCount = Post::published()->count();
+        } elseif ($status == 'scheduled') {
+            $posts = Post::scheduled()->with('category', 'author')->latest()->paginate($this->perPage);
+            $postsCount = Post::scheduled()->count();
+        } elseif ($status == 'draft') {
+            $posts = Post::draft()->with('category', 'author')->latest()->paginate($this->perPage);
+            $postsCount = Post::draft()->count();
         } else {
             $posts = Post::with('category', 'author')->latest()->paginate($this->perPage);
             $postsCount = Post::count();
-            $onlyTrashed = false;
         }
 
         $this->activeMenuSubItem = 'All Posts';
-
 
         return view('backend.blog.index', [
             'posts' => $posts,
@@ -43,6 +52,7 @@ class BlogController extends CoreController
             'onlyTrashed' => $onlyTrashed,
             'activeMenuItem' => $this->activeMenuItem,
             'activeMenuSubItem' => $this->activeMenuSubItem,
+            'statusList' => $this->statusList(),
         ]);
     }
 
@@ -90,10 +100,11 @@ class BlogController extends CoreController
     public function update(PostRequest $request, $id)
     {
         $post = Post::findOrFail($id);
-
+        $oldImage = $post->image;
         $data = $this->handleRequest($request);
-
         $post->update($data);
+
+        if ($oldImage !== $post->image) $this->removeImage($oldImage);
 
         return redirect()->route('backend.blog.index')->with([
             'type' => 'success',
@@ -113,7 +124,10 @@ class BlogController extends CoreController
 
     public function forceDestroy($id)
     {
-        Post::withTrashed()->findOrFail($id)->forceDelete();
+        $post = Post::withTrashed()->findOrFail($id);
+        $post->forceDelete();
+
+        $this->removeImage($post->image);
 
         return redirect()->route('backend.blog.index', ['status' => 'trash'])->with([
             'type' => 'success',
@@ -127,7 +141,7 @@ class BlogController extends CoreController
 
         $post->restore();
 
-        return redirect()->route('backend.blog.index')->with([
+        return redirect()->back()->with([
             'type' => 'success',
             'message' => 'The post has been restored from the Trash.',
         ]);
@@ -158,5 +172,29 @@ class BlogController extends CoreController
         }
 
         return $data;
+    }
+
+    private function removeImage($image)
+    {
+        if (!empty($image)) {
+            $imagePath = $this->uploadPath . '/' . $image;
+            $ext = substr(strrchr($image, '.'), 1);
+            $thumbnail = str_replace(".{$ext}", "_thumb.{$ext}", $image);
+            $thumbnailPath = $this->uploadPath . '/' . $thumbnail;
+
+            if (file_exists($imagePath)) unlink($imagePath);
+            if (file_exists($thumbnailPath)) unlink($thumbnailPath);
+        }
+    }
+
+    private function statusList()
+    {
+        return [
+            'all' => Post::count(),
+            'published' => Post::published()->count(),
+            'scheduled' => Post::scheduled()->count(),
+            'draft' => Post::draft()->count(),
+            'trash' => Post::onlyTrashed()->count(),
+        ];
     }
 }
