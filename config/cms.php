@@ -17,4 +17,6 @@ return [
         ],
     ],
 
+    'default_category_id' => 8,
+
 ];

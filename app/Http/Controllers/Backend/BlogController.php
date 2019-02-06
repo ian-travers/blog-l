@@ -17,7 +17,6 @@ class BlogController extends CoreController
     {
         parent::__construct();
         $this->activeMenuItem = 'Blog';
-        $this->perPage = 6;
         $this->uploadPath = public_path(config('cms.image.directory'));
     }
 

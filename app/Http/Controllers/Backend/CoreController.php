@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 
 class CoreController extends Controller
 {
+    protected $perPage = 6;
+
     protected $activeMenuItem;
     protected $activeMenuSubItem;
 
