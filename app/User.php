@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
+use Laratrust\Traits\LaratrustUserTrait;
 
 /**
  * Class User
@@ -27,6 +28,7 @@ use Illuminate\Support\Facades\Hash;
  */
 class User extends Authenticatable
 {
+    use LaratrustUserTrait;
     use Notifiable;
 
     /**
