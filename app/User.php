@@ -7,6 +7,7 @@ use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class User
@@ -34,7 +35,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'email',
+        'name', 'slug', 'email', 'password'
     ];
 
     /**
@@ -77,5 +78,10 @@ class User extends Authenticatable
     public function setSlugAttribute($value)
     {
         $this->attributes['slug'] = str_slug(str_random() . '-' . $this->name);
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        if (!empty($value)) $this->attributes['password'] = Hash::make($value);
     }
 }
