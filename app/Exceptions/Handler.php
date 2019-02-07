@@ -3,7 +3,9 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Redirect;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +48,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof AuthorizationException) {
+            return Redirect::back()->with([
+                'type' => 'error',
+                'message' => 'You cannot delete default category.',
+            ]);
+        }
         return parent::render($request, $exception);
+
     }
 }

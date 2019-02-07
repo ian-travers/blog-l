@@ -10,19 +10,4 @@ class CategoryDestroyRequest extends FormRequest
     {
         return !($this->route('category') == config('cms.default_category_id'));
     }
-
-    public function forbiddenResponse()
-    {
-        return $this->back()->with([
-            'type' => 'error',
-            'message' => 'You cannot delete default category.',
-        ]);
-    }
-
-    public function rules()
-    {
-        return [
-            //
-        ];
-    }
 }
