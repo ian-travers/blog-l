@@ -34,7 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'email', 'password',
+        'name', 'slug', 'email',
     ];
 
     /**
@@ -72,5 +72,10 @@ class User extends Authenticatable
     public function getRegisteredAttribute()
     {
         return is_null($this->created_at) ? '' : $this->created_at;
+    }
+
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = str_slug(str_random() . '-' . $this->name);
     }
 }

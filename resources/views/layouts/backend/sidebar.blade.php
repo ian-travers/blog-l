@@ -32,6 +32,30 @@
                 </li>
 
                 <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link {{ $activeMenuItem == 'Users' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-pen"></i>
+                        <p>
+                            Users
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview pl-2">
+                        <li class="nav-item">
+                            <a href="{{ route('backend.users.index') }}"
+                               class="nav-link {{ $activeMenuSubItem == 'All Users' ? 'active' : '' }}">
+                                <i class="fas fa-users nav-icon"></i><p>All Users</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.users.create') }}"
+                               class="nav-link {{ $activeMenuSubItem == 'Add User' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i><p>Add user</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link {{ $activeMenuItem == 'Categories' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-pen"></i>
                         <p>

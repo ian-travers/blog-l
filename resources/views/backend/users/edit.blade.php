@@ -1,6 +1,6 @@
 @extends('layouts.backend.main')
 
-@section('title', 'BLOG edit category')
+@section('title', 'USERS edit user')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -11,14 +11,14 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0 text-dark">
-                            Categories
-                            <small>Edit Category</small>
+                            Users
+                            <small>Edit User</small>
                         </h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('backend.categories.index') }}">Categories</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('backend.users.index') }}">Users</a></li>
                             <li class="breadcrumb-item active">Edit</li>
                         </ol>
                     </div><!-- /.col -->
@@ -31,16 +31,16 @@
         <div class="content">
             <div class="container-fluid">
 
-                {!! Form::model($category, [
+                {!! Form::model($user, [
                     'method' => 'put',
-                    'route' => ['backend.categories.update', $category->id],
-                    'id' => 'category-form',
+                    'route' => ['backend.users.update', $user->id],
+                    'id' => 'user-form',
                 ]) !!}
 
-                @include('backend.categories._form')
+                @include('backend.users._form')
 
                 {!! Form::submit('Update', ['class' => 'btn btn-outline-primary']) !!}
-                <a href="{{ route('backend.categories.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                <a href="{{ route('backend.users.index') }}" class="btn btn-outline-secondary">Cancel</a>
                 {!! Form::close() !!}
 
             </div><!-- /.container-fluid -->

@@ -1,6 +1,6 @@
 @extends('layouts.backend.main')
 
-@section('title', 'BLOG edit category')
+@section('title', 'Users create User')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -11,15 +11,15 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0 text-dark">
-                            Categories
-                            <small>Edit Category</small>
+                            Users
+                            <small>Create new user</small>
                         </h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('backend.categories.index') }}">Categories</a></li>
-                            <li class="breadcrumb-item active">Edit</li>
+                            <li class="breadcrumb-item"><a href="{{ route('backend.users.index') }}">Users</a></li>
+                            <li class="breadcrumb-item active">Create</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -31,16 +31,16 @@
         <div class="content">
             <div class="container-fluid">
 
-                {!! Form::model($category, [
-                    'method' => 'put',
-                    'route' => ['backend.categories.update', $category->id],
-                    'id' => 'category-form',
+                {!! Form::model($user, [
+                    'method' => 'post',
+                    'route' => 'backend.users.store',
+                    'id' => 'user-form',
                 ]) !!}
 
-                @include('backend.categories._form')
+                @include('backend.users._form')
 
-                {!! Form::submit('Update', ['class' => 'btn btn-outline-primary']) !!}
-                <a href="{{ route('backend.categories.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                {!! Form::submit('Save', ['class' => 'btn btn-outline-primary']) !!}
+                 <a href="{{ route('backend.users.index') }}" class="btn btn-outline-secondary">Cancel</a>
                 {!! Form::close() !!}
 
             </div><!-- /.container-fluid -->

@@ -21,7 +21,7 @@
                     <i class="fas fa-edit"></i>
                 </a>
                 @if($category->id == config('cms.default_category_id'))
-                    <button type="submit" onclick="return false" class="btn btn-outline-danger btn-sm disabled" title="Delete">
+                    <button type="submit" onclick="return false" class="btn btn-outline-danger btn-sm disabled">
                         <i class="fas fa-times"></i>
                     </button>
                 @else
