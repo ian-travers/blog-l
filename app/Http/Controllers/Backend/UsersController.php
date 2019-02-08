@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Requests\CategoryDestroyRequest;
-use App\Http\Requests\CategoryStoreRequest;
-use App\Http\Requests\CategoryUpdateRequest;
 use App\Http\Requests\UserDestroyRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class UsersController extends CoreController
 {
@@ -55,14 +50,7 @@ class UsersController extends CoreController
         $data = $request->all();
         $data['slug'] = str_slug(str_random() . '-' . $data['name']);
 
-        User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'slug' => $data['slug'],
-            'password' => Hash::make($data['password']),
-        ]);
-
-//        User::create($data);
+        User::create($data);
 
         return redirect()->route('backend.users.index')->with([
             'type' => 'success',
