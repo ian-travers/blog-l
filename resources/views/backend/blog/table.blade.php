@@ -10,7 +10,12 @@
     </thead>
     <tbody>
 
-    @php /* @var App\Post $post */ @endphp
+    @php
+        /* @var App\Post $post */
+
+        $request = request();
+    @endphp
+
     @foreach($posts as $post)
 
         <tr>
@@ -19,12 +24,26 @@
                     'method' => 'delete',
                     'route' => ['backend.blog.destroy', $post->id],
                 ]) !!}
-                <a href="{{ route('backend.blog.edit', $post) }}" class="btn btn-outline-secondary btn-sm" title="Edit">
-                    <i class="fas fa-edit"></i>
-                </a>
-                <button type="submit" class="btn btn-outline-danger btn-sm" title="Move to Trash">
-                    <i class="fas fa-trash"></i>
-                </button>
+
+                @if(check_user_permission($request, "Blog@edit", $post->id))
+                    <a href="{{ route('backend.blog.edit', $post) }}" class="btn btn-outline-secondary btn-sm" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                @else
+                    <a href="#" class="btn btn-outline-secondary btn-sm disabled">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                @endif
+
+                @if(check_user_permission($request, "Blog@destroy", $post->id))
+                    <button type="submit" class="btn btn-outline-danger btn-sm" title="Move to Trash">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                @else
+                    <button type="button" onclick="return false;" class="btn btn-outline-danger btn-sm disabled">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                @endif
                 {!! Form::close() !!}
             </td>
             <td>{{ $post->title }}</td>
