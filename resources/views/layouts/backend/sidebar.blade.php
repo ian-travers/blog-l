@@ -31,6 +31,7 @@
                     </a>
                 </li>
 
+                @role(['admin'])
                 <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link {{ $activeMenuItem == 'Users' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-pen"></i>
@@ -54,7 +55,9 @@
                         </li>
                     </ul>
                 </li>
+                @endrole
 
+                @role(['admin', 'editor'])
                 <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link {{ $activeMenuItem == 'Categories' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-pen"></i>
@@ -78,6 +81,7 @@
                         </li>
                     </ul>
                 </li>
+                @endrole
 
                 <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link {{ $activeMenuItem == 'Blog' ? 'active' : '' }}">

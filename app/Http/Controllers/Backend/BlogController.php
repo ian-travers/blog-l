@@ -11,7 +11,6 @@ use Image;
 class BlogController extends CoreController
 {
     protected $uploadPath;
-    protected $perPage;
 
     public function __construct()
     {
