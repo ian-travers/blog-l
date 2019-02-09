@@ -37,6 +37,9 @@ class BlogController extends CoreController
         } elseif ($status == 'draft') {
             $posts = Post::draft()->with('category', 'author')->latest()->paginate($this->perPage);
             $postsCount = Post::draft()->count();
+        } elseif ($status == 'own') {
+            $posts = $request->user()->posts()->with('category', 'author')->latest()->paginate($this->perPage);
+            $postsCount = $request->user()->posts()->count();
         } else {
             $posts = Post::with('category', 'author')->latest()->paginate($this->perPage);
             $postsCount = Post::count();
@@ -50,7 +53,7 @@ class BlogController extends CoreController
             'onlyTrashed' => $onlyTrashed,
             'activeMenuItem' => $this->activeMenuItem,
             'activeMenuSubItem' => $this->activeMenuSubItem,
-            'statusList' => $this->statusList(),
+            'statusList' => $this->statusList($request),
         ]);
     }
 
@@ -185,9 +188,10 @@ class BlogController extends CoreController
         }
     }
 
-    private function statusList()
+    private function statusList($request)
     {
         return [
+            'own' => $request->user()->posts()->count(),
             'all' => Post::count(),
             'published' => Post::published()->count(),
             'scheduled' => Post::scheduled()->count(),
