@@ -18,6 +18,7 @@ class UserUpdateRequest extends FormRequest
             'slug' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email,' . $this->route("user"),
             'password' => 'required_with:password_confirmation|confirmed',
+            'role' => 'required',
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserStoreRequest extends FormRequest
+class AccountUpdateRequest extends FormRequest
 {
     public function authorize()
     {
@@ -16,8 +16,8 @@ class UserStoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'email' => 'required|email|unique:users,email,' . auth()->user()->id,
+            'password' => 'required_with:password_confirmation|confirmed',
             'role' => 'required',
         ];
     }

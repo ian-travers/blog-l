@@ -107,6 +107,10 @@
         </li>
 
         <!-- Current User Dropdown Menu -->
+        @php
+        /* @var App\User $currentUser */
+        $currentUser = Auth::user();
+        @endphp
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <div class="image">
@@ -119,10 +123,10 @@
                 <div class="user-header">
                     <img src="/img/240px-user_icon.png" class="img-circle elevation-4" alt="User Image">
                     <p class="mt-2">
-                        {{ Auth::user()->name }}
-                        @if(Auth::user()->created_at)
+                        {{ $currentUser->name }} - {{ $currentUser->roles()->first()->display_name }}
+                        @if($currentUser->created_at)
                             <br>
-                            <small>Registered {{ Auth::user()->registered }}</small>
+                            <small>Registered {{ $currentUser->registered }}</small>
                         @endif
                     </p>
                 </div>

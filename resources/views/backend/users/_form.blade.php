@@ -48,6 +48,45 @@
                         </div>
                     @endif
                 </div>
+
+                <div class="form-group">
+                    {!! Form::label('role') !!}
+
+                    @if($user->exists && ($user->id == config('cms.default_user_id')) || isset($hideRoleDropdown))
+                        {!! Form::hidden('role', $user->roles()->first()->id) !!}
+                        <p class="form-control-plaintext">{{ $user->roles()->first()->display_name }}</p>
+                    @else
+                        {!! Form::select(
+                            'role',
+                            App\Role::pluck('display_name', 'id'),
+                            $user->exists ? $user->roles()->first()->id : null,
+                            [
+                                'class' => [
+                                    ' form-control',
+                                    $errors->has('role') ? 'is-invalid' : ''
+                                ],
+                                'placeholder' => '-- Choose a role --'
+                            ]
+                        ) !!}
+                    @endif
+                    @if($errors->has('role'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('role') }}</strong>
+                        </div>
+                    @endif
+
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('bio') !!}
+                    {!! Form::textarea('bio', null, ['class' => 'form-control', 'rows' => 5]) !!}
+                    @if($errors->has('bio'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('bio') }}</strong>
+                        </div>
+                    @endif
+                </div>
+
             </div>
         </div>
     </div>

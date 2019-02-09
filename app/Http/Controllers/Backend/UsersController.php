@@ -50,7 +50,9 @@ class UsersController extends CoreController
         $data = $request->all();
         $data['slug'] = str_slug(str_random() . '-' . $data['name']);
 
-        User::create($data);
+        $user = User::create($data);
+        $user->attachRole($request->role);
+
 
         return redirect()->route('backend.users.index')->with([
             'type' => 'success',
@@ -78,7 +80,11 @@ class UsersController extends CoreController
 
     public function update(UserUpdateRequest $request, $id)
     {
-        User::findOrFail($id)->update($request->all());
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+
+        $user->detachRoles();
+        $user->attachRole($request->role);
 
         return redirect()->route('backend.users.index')->with([
             'type' => 'success',
