@@ -27,7 +27,7 @@ class NavigationComposer
 
     private function composeTags(View $view)
     {
-        $tags = Tag::all();
+        $tags = Tag::has('posts')->get();
         $view->with('tags', $tags);
     }
 
