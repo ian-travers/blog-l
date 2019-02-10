@@ -15,6 +15,7 @@ class BlogController extends Controller
         $posts = Post::with('author')
             ->latestFirst()
             ->published()
+            ->filter(request('term'))
             ->paginate($this->postsPerPage);
 
         return view('blog.index', compact('posts'));

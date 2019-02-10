@@ -10,17 +10,8 @@
                         Nothing found
                     </div>
                 @else
-                    @if(isset($categoryName))
-                        <div class="alert alert-info">
-                            Category: <strong>{{ $categoryName }}</strong>
-                        </div>
-                    @endif
 
-                    @if(isset($authorName))
-                        <div class="alert alert-info">
-                            Author: <strong>{{ $authorName }}</strong>
-                        </div>
-                    @endif
+                    @include('blog.alert')
 
                     @foreach($posts as $post)
                         @php /* @var App\Post $post */ @endphp
@@ -70,7 +61,7 @@
 
 
                 <nav>
-                    {{ $posts->links() }}
+                    {{ $posts->appends(request()->only('term'))->links() }}
                 </nav>
             </div>
 

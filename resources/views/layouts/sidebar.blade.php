@@ -1,17 +1,15 @@
-
-
 <div class="col-md-4">
     <aside class="right-sidebar">
-        {{--<div class="search-widget">
-            <div class="input-group">
-                <input type="text" class="form-control input-lg" placeholder="Search for...">
-                <span class="input-group-btn">
-                            <button class="btn btn-lg btn-outline-secondary ml-0 input-group-append" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                          </span>
-            </div><!-- /input-group -->
-        </div>--}}
+        <div class="search-widget">
+            <form action="{{ route('blog.index') }}">
+                <div class="input-group">
+                    <input type="text" class="form-control input-lg" value="{{ request('term') }}" name="term" placeholder="Search for...">
+                    <button class="btn btn-lg border ml-0 input-group-append" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div><!-- /input-group -->
+            </form>
+        </div>
 
         <div class="widget">
             <div class="widget-heading">
@@ -25,7 +23,8 @@
 
                         <li>
                             <div>
-                                <a href="{{ route('category', $category->slug) }}"><i class="fas fa-angle-right"></i> {{ $category->title }}</a>
+                                <a href="{{ route('category', $category->slug) }}"><i
+                                            class="fas fa-angle-right"></i> {{ $category->title }}</a>
                                 <span class="badge badge-secondary float-right">{{ $category->posts->count() }}</span>
                             </div>
 

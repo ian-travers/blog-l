@@ -124,6 +124,22 @@ class Post extends Model
         return $query->whereNull('published_at');
     }
 
+    public function scopeFilter($query, $term)
+    {
+        if ($term) {
+            $query->where(function ($q) use ($term) {
+                // search in the related model
+                $q->whereHas('author', function ($qr) use ($term) {
+                   $qr->where('name', 'like', "%{$term}%");
+                });
+
+                // search in the model
+                $q->orWhere('title', 'like', "%{$term}%");
+                $q->orWhere('excerpt', 'like', "%{$term}%");
+            });
+        }
+    }
+
     public function dateFormatted($showTimes = false)
     {
         $format = "d-m-Y";
