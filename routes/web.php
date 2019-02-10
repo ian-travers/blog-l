@@ -8,6 +8,8 @@ Route::get('/category/{category}', 'BlogController@category')->name('category');
 
 Route::get('author/{author}', 'BlogController@author')->name('author');
 
+Route::get('tag/{tag}', 'BlogController@tag')->name('tag');
+
 Auth::routes();
 
 Route::get('/home', 'Backend\HomeController@index')->name('home');

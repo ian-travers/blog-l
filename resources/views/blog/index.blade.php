@@ -4,7 +4,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-9">
                 @if(!$posts->count())
                     <div class="alert alert-warning">
                         Nothing found
@@ -38,15 +38,16 @@
                                 <div class="post-meta padding-10 clearfix">
                                     <div class="pull-left">
                                         <ul class="post-meta-group">
-                                            <li><i class="far fa-user"></i><a
+                                            <li><i class="fa fa-user"></i><a
                                                         href="{{ route('author', $post->author->slug) }}">{{ $post->author->name }}</a>
                                             </li>
-                                            <li><i class="far fa-clock"></i>Created {{ $post->date }}</li>
-                                            <li><i class="far fa-clock"></i>Published {{ $post->published_date }}</li>
-                                            <li><i class="far fa-folder"></i><a
+                                            <li><i class="fa fa-clock"></i>Created {{ $post->date }}</li>
+                                            <li><i class="fa fa-clock"></i>Published {{ $post->published_date }}</li>
+                                            <li><i class="fa fa-folder"></i><a
                                                         href="{{ route('category', $post->category->slug) }}"> {{ $post->category->title }}</a>
                                             </li>
-                                            <li><i class="far fa-comments"></i><a href="#">4 Comments</a></li>
+                                            <li><i class="fa fa-tags"></i>{!! $post->tags_html !!}</li>
+                                            <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
                                         </ul>
                                     </div>
                                     <div class="pull-right">

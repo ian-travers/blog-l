@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Tag;
 use App\User;
 
 class BlogController extends Controller
@@ -50,6 +51,19 @@ class BlogController extends Controller
             ->paginate($this->postsPerPage);
 
         return view('blog.index', compact('posts', 'categoryName'));
+    }
+
+    public function tag(Tag $tag)
+    {
+        $tagName = $tag->name;
+
+        $posts = $tag->posts()
+            ->with('author')
+            ->latestFirst()
+            ->published()
+            ->paginate($this->postsPerPage);
+
+        return view('blog.index', compact('posts', 'tagName'));
     }
 
     public function author(User $author)

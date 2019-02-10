@@ -14,7 +14,6 @@ a:hover {
     text-decoration: none;
 }
 
-
 .navbar-brand {
     text-transform: uppercase;
     font-weight: bold;
@@ -41,7 +40,7 @@ header .navbar-default, .post-item, .widget, footer, .post-author, .post-comment
 
 .post-item-image {
     max-width: 100%;
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .post-item-image img {
@@ -155,6 +154,7 @@ ul.post-meta-group li i {
 .post-comments {
     padding-top: 10px;
 }
+
 .post-comments h3 {
     text-align: center;
     font-weight: bold;
@@ -288,7 +288,7 @@ ul.tags li a {
     color: #333;
     font-size: 13px;
     padding: 5px 8px;
-    text-decoration:none;
+    text-decoration: none;
 }
 
 ul.tags li a:hover {
@@ -318,14 +318,14 @@ ul.social-icons li {
 }
 
 .form-control, .btn {
-  -webkit-border-radius: 0;
-     -moz-border-radius: 0;
-          border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
 
 .form-group.required label:after {
-  content:" *";
-  color:red;
+    content: " *";
+    color: red;
 }
 
 span.required {
