@@ -86,6 +86,25 @@
                 </ul>
             </div>
         </div>
+
+        <div class="widget">
+            <div class="widget-heading">
+                <h4>Archives</h4>
+            </div>
+            <div class="widget-body">
+                <ul class="categories">
+
+                    @foreach($archives as $archive)
+
+                        <li>
+                            <a href="{{ route('blog.index', ['month' => $archive->month, 'year' => $archive->year]) }}">{{ $archive->month . ' ' . $archive->year }}</a>
+                            <span class="badge badge-secondary float-right">{{ $archive->post_count }}</span>
+                        </li>
+
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </aside>
 </div>
 

@@ -12,14 +12,13 @@ class PostsTableSeeder extends Seeder
 
         $posts = [];
         $faker = Faker\Factory::create();
-        $date = Carbon::create(2019, 1, 10, 8, 45);
+        $date = Carbon::now()->modify('-1 year');
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 36; $i++) {
 
             $title = $faker->sentence(rand(8, 12));
             $image = "Post_Image_" . rand(1, 5) . ".jpg";
-//            $date = date('Y-m-d H:i:s', strtotime("2019-01-08 08:00:00 + {$i} days"));
-            $date->addDay(1);
+            $date->addDay(10);
             $publishedDate = clone($date);
             $createdDate = Clone($date);
 
@@ -37,7 +36,7 @@ class PostsTableSeeder extends Seeder
                 'category_id' => 0,
                 'created_at' => $createdDate,
                 'updated_at' => $createdDate,
-                'published_at' => $i > 4 && rand(0, 1) == 0 ? null : $publishedDate->addDay($i + rand(3, 5)),
+                'published_at' => $i < 30 ? $publishedDate : ( rand(0, 1) == 0 ? NULL : $publishedDate->addDays(4) ),
                 'views_count' => rand(1, 10) * 10,
             ];
         }

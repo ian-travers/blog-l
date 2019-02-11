@@ -9,14 +9,14 @@ use App\User;
 
 class BlogController extends Controller
 {
-    protected $postsPerPage = 3;
+    protected $postsPerPage = 5;
 
     public function index()
     {
         $posts = Post::with('author', 'tags', 'category')
             ->latestFirst()
             ->published()
-            ->filter(request('term'))
+            ->filter(request()->only(['term', 'month', 'year']))
             ->paginate($this->postsPerPage);
 
         return view('blog.index', compact('posts'));
