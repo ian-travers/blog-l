@@ -35,35 +35,38 @@
 
     <div class="comment-footer padding-10">
         <h3>Leave a comment</h3>
-        <form>
-            <div class="form-group required">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" class="form-control">
+        {!! Form::open([
+            'route' => ['blog.comments', $post->slug],
+        ]) !!}
+        <div class="form-group required">
+            <label for="name">Name</label>
+            {!! Form::text('author_name', null, ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group required">
+            <label for="email">Email</label>
+            {!! Form::text('author_email', null, ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group">
+            <label for="website">Website</label>
+            {!! Form::text('author_url', null, ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group required">
+            <label for="comment">Comment</label>
+            {!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => 6]) !!}
+        </div>
+        <div class="clearfix">
+            <div class="float-left">
+                {!! Form::submit('Submit', ['class' => 'btn  btn-success']) !!}
             </div>
-            <div class="form-group required">
-                <label for="email">Email</label>
-                <input type="text" name="email" id="email" class="form-control">
+            <div class="float-right">
+                <p class="text-muted">
+                    <span class="required">*</span>
+                    <em>Indicates required fields</em>
+                </p>
             </div>
-            <div class="form-group">
-                <label for="website">Website</label>
-                <input type="text" name="website" id="website" class="form-control">
-            </div>
-            <div class="form-group required">
-                <label for="comment">Comment</label>
-                <textarea name="comment" id="comment" rows="6" class="form-control"></textarea>
-            </div>
-            <div class="clearfix">
-                <div class="pull-left">
-                    <button type="submit" class="btn btn-lg btn-success">Submit</button>
-                </div>
-                <div class="pull-right">
-                    <p class="text-muted">
-                        <span class="required">*</span>
-                        <em>Indicates required fields</em>
-                    </p>
-                </div>
-            </div>
-        </form>
+        </div>
+
+        {!! Form::close() !!}
     </div>
 
 </article>

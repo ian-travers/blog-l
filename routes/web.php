@@ -4,6 +4,8 @@ Route::get('/', 'BlogController@index')->name('blog.index');
 
 Route::get('/blog/{slug}', 'BlogController@show')->name('blog.show');
 
+Route::post('/blog/{slug}/comments', 'CommentsController@store')->name('blog.comments');
+
 Route::get('/category/{category}', 'BlogController@category')->name('category');
 
 Route::get('author/{author}', 'BlogController@author')->name('author');
