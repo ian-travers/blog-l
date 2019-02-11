@@ -35,24 +35,59 @@
 
     <div class="comment-footer padding-10">
         <h3>Leave a comment</h3>
+
+        @if(session('message'))
+            <div class="alert alert-info">
+                {{ session('message') }}
+            </div>
+        @endif
+
         {!! Form::open([
             'route' => ['blog.comments', $post->slug],
         ]) !!}
+
         <div class="form-group required">
             <label for="name">Name</label>
-            {!! Form::text('author_name', null, ['class' => 'form-control']) !!}
+            {!! Form::text('author_name', null, ['class' => [' form-control', $errors->has('author_name') ? 'is-invalid' : '']]) !!}
+
+            @if($errors->has('author_name'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('author_name') }}</strong>
+                </div>
+            @endif
         </div>
+
         <div class="form-group required">
             <label for="email">Email</label>
-            {!! Form::text('author_email', null, ['class' => 'form-control']) !!}
+            {!! Form::text('author_email', null, ['class' => [' form-control', $errors->has('author_email') ? 'is-invalid' : '']]) !!}
+
+            @if($errors->has('author_email'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('author_email') }}</strong>
+                </div>
+            @endif
         </div>
+
         <div class="form-group">
             <label for="website">Website</label>
-            {!! Form::text('author_url', null, ['class' => 'form-control']) !!}
+            {!! Form::text('author_url', null, ['class' => [' form-control', $errors->has('author_url') ? 'is-invalid' : '']]) !!}
+
+            @if($errors->has('author_url'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('author_url') }}</strong>
+                </div>
+            @endif
         </div>
+
         <div class="form-group required">
             <label for="comment">Comment</label>
-            {!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => 6]) !!}
+            {!! Form::textarea('body', null, ['class' => [' form-control', $errors->has('body') ? 'is-invalid' : ''], 'rows' => 6]) !!}
+
+            @if($errors->has('body'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('body') }}</strong>
+                </div>
+            @endif
         </div>
         <div class="clearfix">
             <div class="float-left">
