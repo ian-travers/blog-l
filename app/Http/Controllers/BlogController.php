@@ -13,7 +13,7 @@ class BlogController extends Controller
 
     public function index()
     {
-        $posts = Post::with('author', 'tags', 'category')
+        $posts = Post::with('author', 'tags', 'category', 'comments')
             ->latestFirst()
             ->published()
             ->filter(request()->only(['term', 'month', 'year']))
@@ -45,7 +45,7 @@ class BlogController extends Controller
         $categoryName = $category->title;
 
         $posts = $category->posts()
-            ->with('author', 'tags')
+            ->with('author', 'tags', 'comments')
             ->latestFirst()
             ->published()
             ->paginate($this->postsPerPage);
@@ -58,7 +58,7 @@ class BlogController extends Controller
         $tagName = $tag->name;
 
         $posts = $tag->posts()
-            ->with('author', 'category')
+            ->with('author', 'category', 'comments')
             ->latestFirst()
             ->published()
             ->paginate($this->postsPerPage);
@@ -71,7 +71,7 @@ class BlogController extends Controller
         $authorName = $author->name;
 
         $posts = $author->posts()
-            ->with('category', 'tags')
+            ->with('category', 'tags', 'comments')
             ->latestFirst()
             ->published()
             ->paginate($this->postsPerPage);
