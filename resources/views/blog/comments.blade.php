@@ -9,7 +9,7 @@
                 /* @var App\Comment $comment */
             @endphp
 
-            @foreach($post->comments as $comment)
+            @foreach($postComments as $comment)
 
                 <li class="comment-item">
                     <div class="comment-heading clearfix">
@@ -26,6 +26,10 @@
 
             @endforeach
         </ul>
+
+        <nav>
+            {!! $postComments->links() !!}
+        </nav>
 
     </div>
 

@@ -32,12 +32,14 @@ class BlogController extends Controller
 //        #2
         $post->increment('views_count');
 
+        $postComments = $post->comments()->simplePaginate(3);
+
 
         $postAuthorPostsCount = $post->author->posts()
             ->published()
             ->count();
 
-        return view('blog.show', compact('post', 'postAuthorPostsCount'));
+        return view('blog.show', compact('post', 'postAuthorPostsCount', 'postComments'));
     }
 
     public function category(Category $category)
