@@ -67,6 +67,24 @@ class Post extends Model
         $this->comments()->create($data);
     }
 
+    public function createTags($str)
+    {
+        $tags = explode(",", $str);
+        $tagIds = [];
+
+        foreach ($tags as $tag)
+        {
+            $newTag = Tag::firstOrCreate([
+                'slug' => str_slug($tag),
+                'name' => ucwords(trim($tag))
+            ]);
+
+            $tagIds[] = $newTag->id;
+        }
+
+        $this->tags()->sync($tagIds);
+    }
+
     public function getImageUrlAttribute()
     {
         $imageUrl = "";
@@ -128,7 +146,11 @@ class Post extends Model
         }
 
         return implode(', ', $anchors);
+    }
 
+    public function getTagsListAttribute()
+    {
+        return $this->tags()->pluck('name');
     }
 
     public function scopeLatestFirst(Builder $query)

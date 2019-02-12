@@ -72,7 +72,8 @@ class BlogController extends CoreController
     {
         $data = $this->handleRequest($request);
 
-        $request->user()->posts()->create($data);
+        $newPost = $request->user()->posts()->create($data);
+        $newPost->createTags($data['post_tags']);
 
         return redirect()->route('backend.blog.index')->with([
             'type' => 'success',
@@ -104,6 +105,7 @@ class BlogController extends CoreController
         $oldImage = $post->image;
         $data = $this->handleRequest($request);
         $post->update($data);
+        $post->createTags($data['post_tags']);
 
         if ($oldImage !== $post->image) $this->removeImage($oldImage);
 

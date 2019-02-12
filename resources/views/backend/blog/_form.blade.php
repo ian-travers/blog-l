@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="form-group">
                     {!! Form::label('title') !!}
-                    {!! Form::text('title', null, ['class' => [' form-control',$errors->has('title') ? 'is-invalid' : '']]) !!}
+                    {!! Form::text('title', null, ['class' => [' form-control', $errors->has('title') ? 'is-invalid' : '']]) !!}
                     @if($errors->has('title'))
                         <div class="invalid-feedback">
                             <strong>{{ $errors->first('title') }}</strong>
@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     {!! Form::label('excerpt') !!}
-                    {!! Form::textarea('excerpt', null, ['class' => [' form-control',$errors->has('excerpt') ? 'is-invalid' : ''], 'rows' => 4]) !!}
+                    {!! Form::textarea('excerpt', null, ['class' => [' form-control', $errors->has('excerpt') ? 'is-invalid' : ''], 'rows' => 4]) !!}
                     @if($errors->has('excerpt'))
                         <div class="invalid-feedback">
                             <strong>{{ $errors->first('excerpt') }}</strong>
@@ -31,7 +31,7 @@
 
                 <div class="form-group">
                     {!! Form::label('body') !!}
-                    {!! Form::textarea('body', null, ['class' => [' form-control',$errors->has('body') ? 'is-invalid' : '']]) !!}
+                    {!! Form::textarea('body', null, ['class' => [' form-control', $errors->has('body') ? 'is-invalid' : '']]) !!}
                     @if($errors->has('body'))
                         <div class="invalid-feedback">
                             <strong>{{ $errors->first('body') }}</strong>
@@ -52,6 +52,22 @@
                     @if($errors->has('category_id'))
                         <div class="invalid-feedback">
                             <strong>{{ $errors->first('category_id') }}</strong>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h5 class="m-0">Tags</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    {!! Form::text('post_tags', null, ['class' => [' form-control', $errors->has('title') ? 'is-invalid' : '']]) !!}
+                    @if($errors->has('post_tags'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('post_tags') }}</strong>
                         </div>
                     @endif
                 </div>
