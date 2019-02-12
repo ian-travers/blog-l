@@ -129,12 +129,12 @@ class Post extends Model
 
     public function getBodyHtmlAttribute()
     {
-        return $this->body ? Markdown::convertToHTML(e($this->body)) : null;
+        return $this->body ? clean($this->prepareHtml($this->body)) : null;
     }
 
     public function getExcerptHtmlAttribute()
     {
-        return $this->excerpt ? Markdown::convertToHTML(e($this->excerpt)) : null;
+        return $this->excerpt ? clean($this->prepareHtml($this->excerpt)) : null;
     }
 
     public function getTagsHtmlAttribute()
@@ -243,6 +243,10 @@ class Post extends Model
         $this->attributes['published_at'] = $value ? Carbon::createFromFormat('Y-m-d\TH:i', $value) : null;
     }
 
+    private function prepareHtml(string $text)
+    {
+        return \Parsedown::instance()->text($text);
+    }
 }
 
 
