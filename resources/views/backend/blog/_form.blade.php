@@ -79,18 +79,14 @@
                 <h5 class="m-0">{!! Form::label('image', 'Feature Image') !!}</h5>
             </div>
 
-            @php $imgUrl = $post->image_thumb_url ?: null @endphp
+            @php $imgUrl = $post->image_url ?: null @endphp
 
             <div class="card-body">
 
-                @if($imgUrl)
-
-                    <div class="text-center">
-                        {!! Form::image($imgUrl) !!}
-                    </div>
-                @else
-                    <h6 class="text-info text-center">The post has no feature image</h6>
+                @if(!$imgUrl)
+                    <h6 class="text-center">The post has no feature image</h6>
                 @endif
+
                 <div class="form-group">
                     {!! Form::file('image', [
                         'id' => 'input-image',
@@ -99,6 +95,7 @@
                             $errors->has('image') ? ' is-invalid' : ''
                         ]
                     ]) !!}
+
                     @if($errors->has('image'))
                         <div class="invalid-feedback">
                             <strong>{{ $errors->first('image') }}</strong>

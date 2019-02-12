@@ -3,7 +3,6 @@
 namespace App;
 
 use Carbon\Carbon;
-use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -38,6 +37,6 @@ class Comment extends Model
 
     public function getBodyHtmlAttribute()
     {
-        return Markdown::convertToHTML(e($this->body));
+        return clean($this->body);
     }
 }

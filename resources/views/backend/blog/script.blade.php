@@ -17,6 +17,18 @@
             showRemove: false,
             showCancel: false,
             maxFileSize: 2000,
+
+            initialPreview: ['{!! $post->image_url !!}'],
+            initialPreviewAsData: true,
+            // initialPreviewConfig: [
+            //     {
+            //         caption: "Moon.jpg",
+            //         width: "120px",
+            //         frameAttr: {
+            //             style: 'width:120px',
+            //         },
+            //     },
+            // ],
         });
 
         @if($post->exists)

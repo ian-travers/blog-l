@@ -3,9 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
-use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Laratrust\Traits\LaratrustUserTrait;
@@ -61,7 +59,7 @@ class User extends Authenticatable
 
     public function getBioHtmlAttribute()
     {
-        return $this->bio ? Markdown::convertToHTML(e($this->bio)) : null;
+        return $this->bio ? clean($this->bio) : null;
     }
 
     public function gravatar()
