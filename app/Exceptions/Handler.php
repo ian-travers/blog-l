@@ -51,7 +51,7 @@ class Handler extends ExceptionHandler
         if ($exception instanceof AuthorizationException) {
             return Redirect::back()->with([
                 'type' => 'error',
-                'message' => 'You cannot delete default category.',
+                'message' => 'У вас не достаточно прав на выполнение этой операции.',
             ]);
         }
         return parent::render($request, $exception);

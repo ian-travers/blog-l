@@ -13,8 +13,6 @@ class UserDestroyRequest extends FormRequest
 
     public function rules()
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

@@ -20,6 +20,7 @@
                 <a href="{{ route('backend.categories.edit', $category->id) }}" class="btn btn-outline-secondary btn-sm" title="Edit">
                     <i class="fas fa-edit"></i>
                 </a>
+
                 @if($category->id == config('cms.default_category_id'))
                     <button type="submit" onclick="return false" class="btn btn-outline-danger btn-sm disabled">
                         <i class="fas fa-times"></i>
@@ -29,6 +30,7 @@
                         <i class="fas fa-times"></i>
                     </button>
                 @endif
+
                 {!! Form::close() !!}
             </td>
             <td>{{ $category->title }}</td>
