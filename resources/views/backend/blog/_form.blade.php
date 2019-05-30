@@ -5,7 +5,7 @@
                 <h5 class="m-0"><label>Post content</label></h5>
             </div>
             <div class="card-body">
-                <div class="form-group">
+                <div class="form-group" required>
                     {!! Form::label('title') !!}
                     {!! Form::text('title', null, ['class' => [' form-control', $errors->has('title') ? 'is-invalid' : '']]) !!}
                     @if($errors->has('title'))
